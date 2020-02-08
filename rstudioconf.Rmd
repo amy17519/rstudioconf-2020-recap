@@ -1,0 +1,150 @@
+---
+title: "Rstudio::conf 2020"
+subtitle: "😏<br/> powered by xaringan"
+author: "Amy Tzu-Yu Chen"
+iate: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+---
+background-image: url(https://pbs.twimg.com/media/EPuu5-AX4AATqFy?format=jpg&name=medium)
+background-position: 30% 30%
+class: center, bottom, inverse
+
+## R-Ladies Photo
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+
+
+```
+
+
+---
+
+# RMarkdown
+
+- Now you can use Rmarkdown to produce (almost) any type of documents. You can even reuse them easily
+
+--
+```{r eval=FALSE, tidy=FALSE}
+library(rmarkdown) # Docs
+library(xaringan)  # Slides
+library(blogdown)  # Blogs or simple website
+library(pkgdown)   # R package website
+library(bookdown)  # Write a book
+```
+
+--
+
+--
+.footnote[
+[1] Rob Hyndman had a talk on Rmd. He uses Rmarkdown for everything except writing emails. Has template R packages etc.
+
+[2] Yihui had a cool demo on how changing 1-5 lines can change one single Rmd into 14 different format
+
+[3] Show infinite moon reader
+
+[4] Show examples
+]
+
+---
+
+# Highcharter
+
+* not free for commercial use
+
+---
+# Common New Tools for Pkg Dev
+```{r eval=FALSE, tidy=FALSE}
+library(usethis)   # Set up stuff that you can't ever remember
+library(roxygen2)  # Documentation
+library(testthat)  # Write tests
+library(devtools)  # Iterate and develop
+library(remotes)   # Install github dependencies
+```
+
+---
+
+# ggplot2
+
+- The general trend: encourage people to build their own extensions instead of contributing back to ggplot2. 
+
+- Upcoming release of 4.0
+
+- Focus on faster rendering of plots
+
+--
+
+- ggproto: basically build your own gg class
+
+---
+
+# funneljoin
+
+- https://github.com/robinsones/funneljoin
+
+```{r eval=FALSE, tidy=FALSE}
+landed %>%
+  after_inner_join(registered, 
+                   by_user = "user_id",
+                   by_time = "timestamp",
+                   type = "first-firstafter",
+                   suffix = c("_landed", "_registered"))
+#> # A tibble: 5 x 3
+#>   user_id timestamp_landed timestamp_registered
+#>     <dbl> <date>           <date>              
+#> 1       1 2018-07-01       2018-07-02          
+#> 2       4 2018-07-01       2018-07-02          
+#> 3       3 2018-07-02       2018-07-02          
+#> 4       6 2018-07-07       2018-07-10          
+#> 5       5 2018-07-10       2018-07-11
+```
+
+
+---
+
+# library(later)
+
+- Asynchronous programming came up a lot. Partly due to popularity of shiny.
+
+- Schedule an R function or formula to run after a specified period of time.
+
+- Similar to JavaScript's setTimeout function. 
+
+```{r eval=FALSE, tidy=FALSE}
+later::later(function() {
+  summary(mtcars)
+}, 5)
+```
+
+.footnote[[*] Not really. See next page.]
+
+---
+
+# arrow
+
+- https://enpiar.com/talks/rstudio-conf-2020/#12
+
+---
+
+# library(future)
+
+- Unifying R parallel solutions across platforms without changing much on existing code
+
+- Page 6-9
+
+
+- https://tinyurl.com/u75nx3a
+---
+
+class: center, middle
+
+# Thanks!
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).

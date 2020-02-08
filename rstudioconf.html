@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Rstudio::conf 2020</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Amy Tzu-Yu Chen" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Rstudio::conf 2020
+## 😏<br/> powered by xaringan
+### Amy Tzu-Yu Chen
+
+---
+
+background-image: url(https://pbs.twimg.com/media/EPuu5-AX4AATqFy?format=jpg&amp;name=medium)
+background-position: 30% 30%
+class: center, bottom, inverse
+
+## R-Ladies Photo
+
+
+
+
+---
+
+# RMarkdown
+
+- Now you can use Rmarkdown to produce (almost) any type of documents. You can even reuse them easily
+
+--
+
+```r
+library(rmarkdown) # Docs
+library(xaringan)  # Slides
+library(blogdown)  # Blogs or simple website
+library(pkgdown)   # R package website
+library(bookdown)  # Write a book
+```
+
+--
+
+--
+.footnote[
+[1] Rob Hyndman had a talk on Rmd. He uses Rmarkdown for everything except writing emails. Has template R packages etc.
+
+[2] Yihui had a cool demo on how changing 1-5 lines can change one single Rmd into 14 different format
+
+[3] Show infinite moon reader
+
+[4] Show examples
+]
+
+---
+
+# Highcharter
+
+* not free for commercial use
+
+---
+# Common New Tools for Pkg Dev
+
+```r
+library(usethis)   # Set up stuff that you can't ever remember
+library(roxygen2)  # Documentation
+library(testthat)  # Write tests
+library(devtools)  # Iterate and develop
+library(remotes)   # Install github dependencies
+```
+
+---
+
+# ggplot2
+
+- The general trend: encourage people to build their own extensions instead of contributing back to ggplot2. 
+
+- Upcoming release of 4.0
+
+- Focus on faster rendering of plots
+
+--
+
+- ggproto: basically build your own gg class
+
+---
+
+# funneljoin
+
+- https://github.com/robinsones/funneljoin
+
+
+```r
+landed %&gt;%
+  after_inner_join(registered, 
+                   by_user = "user_id",
+                   by_time = "timestamp",
+                   type = "first-firstafter",
+                   suffix = c("_landed", "_registered"))
+#&gt; # A tibble: 5 x 3
+#&gt;   user_id timestamp_landed timestamp_registered
+#&gt;     &lt;dbl&gt; &lt;date&gt;           &lt;date&gt;              
+#&gt; 1       1 2018-07-01       2018-07-02          
+#&gt; 2       4 2018-07-01       2018-07-02          
+#&gt; 3       3 2018-07-02       2018-07-02          
+#&gt; 4       6 2018-07-07       2018-07-10          
+#&gt; 5       5 2018-07-10       2018-07-11
+```
+
+
+---
+
+# library(later)
+
+- Asynchronous programming came up a lot. Partly due to popularity of shiny.
+
+- Schedule an R function or formula to run after a specified period of time.
+
+- Similar to JavaScript's setTimeout function. 
+
+
+```r
+later::later(function() {
+  summary(mtcars)
+}, 5)
+```
+
+.footnote[[*] Not really. See next page.]
+
+---
+
+# arrow
+
+- https://enpiar.com/talks/rstudio-conf-2020/#12
+
+---
+
+# library(future)
+
+- Unifying R parallel solutions across platforms without changing much on existing code
+
+- Page 6-9
+
+
+- https://tinyurl.com/u75nx3a
+---
+
+class: center, middle
+
+# Thanks!
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
