@@ -1,1 +1,4 @@
-# rstudioconf-2020-recap
+# Rstudio::conf Mini Highlights
+
+
+Slides at https://rstudio-recap2020.netlify.com 
